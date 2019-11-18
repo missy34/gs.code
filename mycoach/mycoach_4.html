@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>mycoach</title>
+        <link rel="icon" type="" href="img/fav2.png">
+        <link rel="stylesheet" href="mycoach_4.css">
+        <link rel="stylesheet" href="reset.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+</head>
+<body>
+
+<div class="main">
+
+    <header id="header">
+        <img src="img/mycoach-logo-white.png" alt="">
+        <p class="text1">●セルフノート</p>
+        <p class="text2">●プロフィール</p>
+        <p class="text3">●コーチと面談する</p>
+        <p class="text4">●Image Analysis</p>
+    </header>
+
+    <div class="container">
+        <div class="title">
+            <p>プロフィール</p>
+            <h2>プロフィールを充実させてみましょう</h2>
+        </div>
+
+    <div id="output"></div>
+
+    <div class="content" id="dialog" title="">
+        <input id="name" autocomplete="off"  placeholder="お名前">
+        <input id="com" autocomplete="off"  placeholder="会社名">
+        <select id="genre">
+            <option>コーチングを受けたい内容</option>
+            <option>仕事について</option>
+            <option>キャリアについて</option>
+            <option>人間関係について</option>
+            <option>食事・美容について</option>
+            <option>収入・家計について</option>
+            <option>結婚・冷暗について</option>
+            <option>子供の教育について</option>
+            <option>家族関係について</option>
+            <option>その他</option>
+            <textarea name="ex" id="ex" cols="30" rows="10" placeholder="具体的な内容"></textarea>
+            <input id="send" type="submit" value="送信">
+        </select>
+
+    <div>
+    
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.1/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+
+$(function() {
+
+// ------------------ファイヤベースの設定------------------
+var config = {
+    apiKey: "AIzaSyBMACEXOMDPhdwxnrNbo6jGBmUlWvaEZmc",
+        authDomain: "mycoach-ee9ed.firebaseapp.com",
+        databaseURL: "https://mycoach-ee9ed.firebaseio.com",
+        projectId: "mycoach-ee9ed",
+        storageBucket: "mycoach-ee9ed.appspot.com",
+        messagingSenderId: "612660781279",
+        appId: "1:612660781279:web:40c064d322227e1348c96a"
+  };
+  firebase.initializeApp(config);
+  // firebase.analytics();
+
+  const database = firebase.database().ref();
+  let userId, userName,userImg;
+
+// ------------------ログインのチェックをします------------------
+
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          user = firebase.auth().currentUser;
+          userId = user.uid;
+          userName = user.displayName;
+          userImg = user.photoURL;
+          console.log(user);
+      } else {
+          //Not Login
+          redirect("mycoach.html");
+      }
+  });
+
+//----------------データをfirebaseに送信する--------------------
+
+// (旧)
+// document.querySelector("#send").onclick = function () {
+//     const key = document.querySelector("#key").value;
+//     database.ref('users/' + userId + "/" + key).set({
+//         data: document.querySelector("#text").value
+//     });
+// }
+// (新)
+// document.querySelector("#send").onclick = function () {
+//     const key = document.querySelector("#key").value;
+//     database.ref('users/' + userId).set({
+//     [key]:document.querySelector("#text").value
+// });
+// (新 jQuery)
+// $("#send").on("click",function(){
+//     const key = $("#key").val();
+//     database.ref('users/' + userId).set({
+//         [key]:$("#text").val()
+//     });
+// });
+
+
+  database.on("child_added",function(data){
+
+
+
+        const v = data.val();  //データ取得
+        const per01 = data.per01; 
+        const per02 = data.per02; 
+        const per03 = data.per03; 
+        const per04 = data.per04; 
+        const per05 = data.per05; 
+        const per06 = data.per06; 
+        const per07 = data.per07; 
+        const per08 = data.per08; 
+
+
+        const str = 
+        '<p>'+v.per01+'</p><p>'+v.per02+'</p><p>'+v.per03+'</p><p>'+v.per04+'</p><p>'+v.per05+'</p><p>'+v.per06+'</p><p>'+v.per07+'</p><p>'+v.per08+'</p>';
+
+        // const str = '<dl id="'+v+'"><dt><img src="/auth/imgs/'+img[v.icon]+'" width="100"><br>'+v.per01+'</dt><br>'+v.per02+'</dt><br>'+v.per03+'</dt></dl>';
+
+        $("#output").append(str);
+        $('#output').animate({scrollTop: $('#output')[0].scrollHeight}, 'fast');
+
+    });
+});
+
+$('.text1').click(function() {
+  setTimeout(function(){
+      window.location.href = 'mycoach_3.html';
+  }, 1000);
+});
+
+
+$('.text3').click(function() {
+    setTimeout(function(){
+        window.location.href = 'video.html';
+    }, 1000);
+});
+
+$('.text4').click(function() {
+  setTimeout(function(){
+      window.location.href = 'CloudVision.html';
+  }, 1000);
+});
+
+
+
+
+        // ＿＿＿＿＿＿＿＿【】＿＿＿＿＿＿＿＿＿
+        // $("#list").append('<p>' + v.per01 + '</p>' );
+        // $("#list").append('<p>' + v.per02 + '</p>' );
+        // $("#list").append('<p>' + v.per03 + '</p>' );
+        // $("#list").append('<p>' + v.per04 + '</p>' );
+        // $("#list").append('<p>' + v.per05 + '</p>' );
+        // $("#list").append('<p>' + v.per06 + '</p>' );
+        // $("#list").append('<p>' + v.per07 + '</p>' );
+        // $("#list").append('<p>' + v.per08 + '</p>' );
+
+        // ＿＿＿＿＿＿＿＿【】＿＿＿＿＿＿＿＿＿
+        //     const html = `
+        //             <dl data-memo-id="${item.memoId}">
+        //                 <dt>${item.title}</dt>
+        //                 <dd>${item.value}</dd>
+        //                 <span>${item.time}</span>
+        //             </dl>`;
+        //             $("#list").prepend(html);
+
+        //             const todo_html = todo.value.title + "<br />" + todo.value.content + "<br />" + todo.value.person + "が" + end_date  + "やる";
+        //     $("#todo_list").prepend(`<div id="${todo.id}">${todo_html}</div>`);
+        // }
+
+        // ＿＿＿＿＿＿＿＿【】＿＿＿＿＿＿＿＿＿
+        // data.forEach(item => {
+        //         const html = `
+        //         <dl data-memo-id="${item.memoId}">
+        //             <dt>${item.title}</dt>
+        //             <dd>${item.value}</dd>
+        //             <span>${item.time}</span>
+        //         </dl>`;
+        //         $("#list").prepend(html);
+        //     })
+        // };
+
+</script>
+
+
+</body>
+</html>

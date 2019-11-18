@@ -1,0 +1,122 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>mycoach</title>
+  <link rel="icon" type="" href="img/fav2.png">
+  <link rel="stylesheet" href="mycoach_5.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="top">
+        <img src="img/mycoach-logo (2).png" alt="" id="logo">
+        <p>コーチを評価する</p>
+    </div>
+
+    <div class="mycoach">
+        <img src="img/yumi.murata_list.png" alt="">
+        <div id="name" class="name01">村田 有美<br>Yumi Murata</div>
+    </div>
+
+    <div id="app">
+        <p>総合満足度: <br><span> {{ total }} </span> / 30</p>
+        <div class="like">
+            <like-component message="話しやすい" @increment="incrementTotal" id="iine"></like-component>
+            <like-component message="的確だった" @increment="incrementTotal" id="iine"></like-component>
+            <like-component message="親身だった" @increment="incrementTotal" id="iine"></like-component>
+        </div>
+    </div>
+
+    <div id="top"><a>TOPに戻る</a></div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+<script>
+
+// ＿＿＿＿＿＿＿＿【いいね機能】＿＿＿＿＿＿＿＿＿
+
+(function() {
+  'use strict';
+
+  var likeComponent = Vue.extend({
+    props: {
+      message: {
+        type: String,
+        default: 'Like'
+      }
+    },
+    data: function() {
+      return {
+        count: 0
+      }
+    },
+    template: '<button @click="countUp">{{ message }} {{ count }}</button>',
+    methods: {
+      countUp: function() {
+        this.count++;
+        this.$emit('increment');
+      }
+    }
+  });
+
+  var app = new Vue({
+    el: '#app',
+    components: {
+      'like-component': likeComponent
+    },
+    data: {
+      total: 0
+    },
+    methods: {
+      incrementTotal: function() {
+        this.total++;
+      }
+    }
+  });
+
+})();
+
+// ＿＿＿＿＿＿＿＿【ページ遷移】＿＿＿＿＿＿＿＿＿
+
+$('#top').on('click',function(){
+    setTimeout(function(){
+            window.location.href = 'mycoach_3.html';
+        }, 500);
+});
+
+$('.text1').click(function() {
+  setTimeout(function(){
+      window.location.href = 'mycoach_3.html';
+  }, 1000);
+});
+
+$('.text2').click(function() {
+    setTimeout(function(){
+        window.location.href = 'mycoach_4.html';
+    }, 1000);
+});
+
+$('.text3').click(function() {
+    setTimeout(function(){
+        window.location.href = 'video.html';
+    }, 1000);
+});
+
+$('.text4').click(function() {
+  setTimeout(function(){
+      window.location.href = 'CloudVision.html';
+  }, 1000);
+});
+
+
+</script>
+
+</body>
+</html>

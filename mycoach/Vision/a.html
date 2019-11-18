@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="a.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <title>URLとる</title>
+</head>
+<body>
+        <input type="url" id="url" autocomplete="off">
+        <button id="getImageFromURL">get</button>
+        <figure id="output"></figure>
+        <canvas id="myCanvas"></canvas>
+
+        <input id="geturl">
+
+
+<script>
+
+    $("#getImageFromURL").on("click",function(){
+        const val = $("#url").val();
+
+        $("#geturl").val(val);
+    
+        console.log(val);
+    });
+
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = new Image();
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0);
+    };
+
+img.src = 'https://cdc.type.jp/recruit/career/';
+
+
+    
+    //   $("#url").on("click",function(){
+    //         $("#key").val("");
+    //         $("#memo").val("");
+    //         currentMemo = undefined;
+    //     });
+    
+    
+</script>
+        
+<script type="text/javascript" src="a.js"></script>
+
+</body>
+</html>

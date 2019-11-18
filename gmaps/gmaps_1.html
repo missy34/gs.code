@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/gmaps.css">
+
+    <title>Places Search Box</title>
+    
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+    <div id="map"></div>
+    <script>
+
+    function initialize() {
+        initMap();
+        initAutocomplete();
+    }
+    var map, marker;
+
+        function initMap() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(  // 取得=get  現在 位置=Current Position
+            function(position) { // 関数（位置）
+                // 緯度・経度を変数に格納
+                var mapLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                // マップオプションを変数に格納
+                var mapOptions = {
+                zoom : 15,          // 拡大倍率
+                center : mapLatLng  // 緯度・経度
+                };
+
+                // マップオブジェクト作成
+                var map = new google.maps.Map(document.getElementById("map"), // マップを表示する要素
+                mapOptions         // マップオプション
+                );
+
+                // マップにマーカーを表示する
+                var marker = new google.maps.Marker({
+                map : map,             // 対象の地図オブジェクト
+                position : mapLatLng   // 緯度・経度
+                });
+
+            },
+        
+            // 取得失敗した場合
+            function(error) {
+                // エラーメッセージを表示
+                switch(error.code) {
+                case 1: // PERMISSION_DENIED
+                    alert("位置情報の利用が許可されていません");
+                    break;
+                case 2: // POSITION_UNAVAILABLE
+                    alert("現在位置が取得できませんでした");
+                    break;
+                case 3: // TIMEOUT
+                    alert("タイムアウトになりました");
+                    break;
+                default:
+                    alert("その他のエラー(エラーコード:"+error.code+")");
+                    break;
+                }
+            }
+            );
+        // Geolocation APIに対応していない
+        } else {
+            alert("この端末では位置情報が取得できません");
+        }
+        };
+
+
+      function initAutocomplete() {
+
+        // Create the search box and link it to the UI element.
+        var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3kx-qpNmBNAgwpNDWE8YwiUJXfhcUZ7Y&libraries=places&callback=initialize"
+         async defer></script>
+  </body>
+</html>

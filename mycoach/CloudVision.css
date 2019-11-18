@@ -1,0 +1,91 @@
+body{
+    text-align: center;
+    font-family:'Roboto','Noto Sans JP', "游ゴシック体", "Yu Gothic", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+}
+/* ユーザのアップロードした画像に関する記述 */
+img{
+    max-height:380px;
+    max-width:420px;
+    height:auto;
+    width:auto;
+    border: 1px solid rgb(64, 145, 232);
+    border-radius: 15px;
+    margin: 20px;
+}
+
+
+#top a{
+    cursor: pointer;
+}
+
+a:hover{
+    color:rgb(64, 145, 232);
+    font-weight: bold;
+}
+
+.resultTableContent{
+    height:30px;
+    border: 1px solid rgb(64, 145, 232);
+    border-radius: 15px;
+}
+
+/* #uploader{
+    background-color: rgb(237, 103, 103);
+    color:white
+} */
+
+#title{
+    height: 80px;
+    text-align: center;
+    background-color: rgb(64, 145, 232);
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    line-height: 80px;
+    letter-spacing:2px;
+    margin: 0px;
+    padding: 0px;
+    top:0;
+    left:0;
+}
+
+#uploadArea{
+    margin: 20px 0px;
+}
+
+.resultArea{
+    width:100%;
+    height:500px;
+    margin: 30px;
+    text-align: center;
+}
+#showPic{
+    width:350px;
+    margin: 30px;
+    float:left;
+}
+#resultTable{
+    width:350px;
+    float:right;
+    margin: 30px 80px 30px 30px;
+}
+
+#chartArea{
+    border: 1px solid rgb(64, 145, 232);
+    border-radius: 15px;
+    width:350px;
+    height:300px;
+    margin: 30px 30px 30px 60px;
+    float:left;
+    padding: 20px;
+}
+#textTable{
+    width:350px;
+    float:right;
+    margin: 0px 80px 30px 30px;
+}
+/* 初期状態では結果部分が表示されないようにするための記述 */
+.hidden{
+    display: none;
+}

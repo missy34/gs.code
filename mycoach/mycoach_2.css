@@ -1,0 +1,175 @@
+body{
+    font-family:'Roboto','Noto Sans JP', "游ゴシック体", "Yu Gothic", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+}
+
+#logo{
+    width: 33%;
+    margin: 20px auto 10px;
+}
+
+span{
+    font-size: 20px;
+}
+
+#logo,p{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.top p,.content p{
+    padding-bottom:30px;
+    color: rgb(64, 145, 232);
+    line-height: 30px;
+    letter-spacing:1px;
+    font-size: 20px;
+    margin: auto;
+    font-weight: bold;
+}
+
+
+.clearfix{
+    display: flex;
+    justify-content: center;
+}
+
+.coach{
+    position: relative;
+    display: none;
+    margin: 20px 50px;
+
+}
+
+img{
+     width: 200px;
+}
+
+#name{
+    position: absolute;
+    width: 200px;
+    top: 95%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(64, 145, 232);
+    border-radius: 10px;
+    text-align: center;
+    line-height: 20px;
+    padding: 15px 0px;
+    box-shadow: 5px 5px 5px rgba(1, 57, 109, 0.4);
+    cursor: pointer;
+}
+
+#strength{
+    position: absolute;
+    width: 200px;
+    top: 130%;
+    left: 50%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#strength a{
+    font-size: 12px;
+    border: 0.5px solid rgb(64, 145, 232);
+    border-radius: 10px;
+    padding:5px;
+}
+
+#name:hover{
+    background-color: rgb(212, 227, 243);
+}
+
+.popup01, .popup02, .popup03{
+    position: relative;
+    display: none;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+ 
+.content{
+    background: rgb(255, 255, 255,1.0);
+    padding: 30px;
+    width: 50%;
+    opacity: 1.0;
+    border-radius: 5px;
+    z-index: 100;
+}
+#batsu{
+    width: 30px;
+    position: absolute;
+    top: 13%;
+    left: 74%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+}
+
+.content img{
+    display: flex;
+    margin: 0 auto;
+    width: 400px;
+}
+
+.content h3{
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button{
+    background: rgb(64, 145, 232);
+    opacity: 1.0;
+    color:white;
+    padding: 10px;
+    border:none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    user-select:none;
+    outline: none;
+    display: flex;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+@media(max-width:850px){
+
+    #logo{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 55%;
+        margin: 70px auto;
+    }
+    .top p{
+        padding-bottom:40px;
+        line-height: 20px;
+        letter-spacing:1px;
+        font-size: 15px;
+    }
+
+    p{
+        font-size: 15px;
+        color:rgb(0, 94, 194);
+    }
+
+
+}

@@ -1,0 +1,84 @@
+body{
+    font-family:'Roboto','Noto Sans JP', "游ゴシック体", "Yu Gothic", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+}
+
+#logo{
+    width: 33%;
+    margin: 20px auto 10px;
+}
+
+#logo,p{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.top p{
+    padding-bottom:30px;
+    color: rgb(64, 145, 232);
+    line-height: 30px;
+    letter-spacing:1px;
+    font-size: 20px;
+    margin: auto;
+    font-weight: bold;
+}
+
+.top img{
+     width: 200px;
+}
+
+.mycoach img{
+    width: 100px;
+    margin: 20px;
+}
+
+#name,.mycoach img{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#name{
+    color: rgb(64, 145, 232);
+}
+
+#app p{
+    letter-spacing:2px;
+    font-size: 20px;
+}
+
+.like{
+    text-align: center;
+    margin: 0 auto;
+}
+
+span{
+    color: rgb(64, 145, 232);
+    font-weight: bold;
+}
+
+#iine{
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    background-color: rgb(64, 145, 232);
+    outline: none;
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+}
+
+#top a{
+    padding-top:20px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    color: rgb(75, 75, 75);
+}
+
+#top a:hover{
+    color: rgb(64, 145, 232);
+    font-weight: bold;
+}

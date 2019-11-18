@@ -1,0 +1,207 @@
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+
+}
+
+header{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 615px;
+    background-color:rgb(64, 145, 232);
+}
+
+header img{
+    margin: 20px 8px;
+    width: 90%;
+}
+
+header p:hover{
+    transform: scale(1.05,1.05);
+    transition: transform 0.5s;
+}
+
+a{
+    padding:35px;
+    color: white;
+    font-size:25px;
+    margin: 0 auto;
+    display: flex;
+    z-index:10;
+}
+
+header p{
+    font-weight: bold;
+    color: white;
+    margin: 30px 15px;
+    display:block;
+    line-height:1.7em;
+    letter-spacing:1.5px;
+	  padding-left:1.5em;
+    cursor: pointer;
+}
+
+.main{
+  display:flex;
+  position: relative;
+}
+
+.wcm{
+  display: none;
+}
+
+#can {
+  position: absolute;
+  top: 30%;
+  left: 21%;
+  background: rgb(64, 145, 232,0.2);
+  width: 250px;
+  height: 350px;
+  padding:30px;
+  padding:30px;
+  border-radius: 5px;
+  }
+
+ #will {
+    position: absolute;
+    top: 30%;
+    left: 73%;
+    background: rgb(64, 145, 232,0.2);
+    width: 250px;
+    height: 350px;
+    padding:30px;
+    padding:30px;
+    border-radius: 5px;
+    }
+  
+
+  textarea{
+    resize: none;
+    font-size: 16px;
+    padding: 10px;
+    margin-top:10px;
+    line-height: 1.5;
+    width: 230px;
+    height: 280px;
+    border-radius: 5px;
+    border:none;
+  }
+
+.title p{
+  position: absolute;
+  top: 5%;
+  left: 40%;
+  color:rgb(64, 145, 232);
+  width: 480px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.title h2{
+  position: absolute;
+  top: 15%;
+  left: 40%;
+  color:rgb(64, 145, 232);
+  width: 480px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing:1px;
+}
+  
+#app {
+  position: absolute;
+  top: 30%;
+  left: 47%;
+  background: rgb(64, 145, 232,0.2);
+  width: 250px;
+  height: 350px;
+  padding:30px;
+  padding:30px;
+  border-radius: 5px;
+  }
+  
+  #app h1,#can h1,#will h1 {
+    font-size: 16px;
+    border-bottom: 1px solid rgb(64, 145, 232);
+    padding: 15px 0;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  
+  #app li,#can li,#will li {
+    line-height: 1.7;
+  }
+  
+
+  #app input[type="text"] {
+    margin-top:10px;
+    padding: 3px;
+    width: 190px;
+  }
+  #can input[type="text"] {
+    margin-top:10px;
+    padding: 3px;
+    width: 190px;
+  }
+  #will input[type="text"] {
+    margin-top:10px;
+    padding: 3px;
+    width: 190px;
+  }
+
+
+  #app input[type="submit"] {
+    padding: 4px;
+  }
+  #can input[type="submit"] {
+    padding: 4px;
+  }
+  #will input[type="submit"] {
+    padding: 4px;
+  }
+
+  .command {
+    font-size: 12px;
+    cursor: pointer;
+    color: #08c;
+  }
+  
+  #app ul,#can ul,#will ul {
+    padding: 0;
+    list-style: none;
+  }
+  
+  #app li > span.done {
+    text-decoration: line-through;
+    color: #bbb;
+  }
+  #can li > span.done {
+    text-decoration: line-through;
+    color: #bbb;
+  }
+  #will li > span.done {
+    text-decoration: line-through;
+    color: #bbb;
+  }
+  
+
+  .info {
+    color: #bbb;
+    font-size: 12px;
+    font-weight: normal;
+  }
+  
+
+  #app h1 > button {
+    float: right;
+  }
+  #can h1 > button {
+    float: right;
+  }
+  #will h1 > button {
+    float: right;
+  }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mycoach</title>
+    <link rel="icon" type="" href="img/fav2.png">
+    <link rel="stylesheet" href="mycoach.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+    
+</head>
+
+<body>
+
+    <div class="tittle">
+            <img src="" alt="" id="top">
+            <div class="login">
+                <img src="img/mycoach-logo-white.png" alt="" id="logo">
+                <p>いい仕事、いい人生を実現するための<br>あなたのためのキャリアコーチング</p>
+            </div>
+            
+        </div>
+        
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+<script>
+   var config = {
+        apiKey: "AIzaSyBMACEXOMDPhdwxnrNbo6jGBmUlWvaEZmc",
+        authDomain: "mycoach-ee9ed.firebaseapp.com",
+        databaseURL: "https://mycoach-ee9ed.firebaseio.com",
+        projectId: "mycoach-ee9ed",
+        storageBucket: "mycoach-ee9ed.appspot.com",
+        messagingSenderId: "612660781279",
+        appId: "1:612660781279:web:40c064d322227e1348c96a"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script type="text/javascript">
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    var uiConfig = {
+        callbacks: {
+            signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+                return true;
+            },
+            uiShown: function () {
+                document.getElementById('loader').style.display = 'none';
+            }
+        },
+        signInFlow: 'popup',
+        signInSuccessUrl: 'mycoach_1.html',
+        signInOptions: [
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+    };
+    ui.start('#firebaseui-auth-container', uiConfig);
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>mycoach</title>
+        <link rel="icon" type="" href="img/fav2.png">
+        <link rel="stylesheet" href="mycoach_1.css">
+        <link rel="stylesheet" href="reset.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+</head>
+<body>
+<div class="top">
+        <img src="img/mycoach-logo (2).png" alt="" id="logo">
+        <p>マイコーチとの相性を診断中…</p>
+ </div>
+
+<div id="questions">
+    <div id="question1">	
+      <p>あなたはどっち派？</p>
+      <button id="btn1" class="btn1" value="外交的">外交的</button>
+      <button id="btn2" class="btn1" value="内向的">内向的</button>
+      <div id="num">1 / 8</div>
+    </div>
+    <div id="question2">	
+      <p>あなたはどっち派？</p>
+      <button id="btn3" class="btn2" value="論理的">論理的</button>
+      <button id="btn4" class="btn2" value="感情的">感情的</button>
+      <div id="num">2 / 8</div>
+    </div>
+    <div id="question3">	
+      <p>あなたはどっち派？</p>
+      <button id="btn5" class="btn3" value="挑戦的">挑戦的</button>
+      <button id="btn6" class="btn3" value="安定的">安定的</button>
+      <div id="num">3 / 8</div>
+    </div>
+    <div id="question4">	
+      <p>あなたはどっち派？</p>
+      <button id="btn7" class="btn4" value="リーダー">リーダー</button>
+      <button id="btn8" class="btn4" value="サポーター">サポーター</button>
+      <div id="num">4 / 8</div>
+    </div>
+    <div id="question5">	
+      <p>あなたはどっち派？</p>
+      <button id="btn9" class="btn5" value="過程重視">過程重視</button>
+      <button id="btn10" class="btn5" value="結果重視">結果重視</button>
+      <div id="num">5 / 8</div>
+    </div>
+    <div id="question6">	
+      <p>あなたはどっち派？</p>
+      <button id="btn11" class="btn6" value="専門職志向">専門職志向</button>
+      <button id="btn12" class="btn6" value="管理職志向">管理職志向</button>
+      <div id="num">6 / 8</div>
+    </div>
+    <div id="question7">	
+      <p>あなたはどっち派？</p>
+      <button id="btn13" class="btn7" value="チーム志向">チーム志向</button>
+      <button id="btn14" class="btn7" value="個人志向">個人志向</button>
+      <div id="num">7 / 8</div>
+    </div>
+    <div id="question8">	
+      <p>あなたはどっち派？</p>
+      <button id="btn15" class="btn8" value="仕事重視">仕事重視</button>
+      <button id="btn16" class="btn8" value="家庭重視">家庭重視</button>
+      <div id="num">8 / 8</div>
+    </div>
+    <!-- <div id="send">結果を送信</div> -->
+</div>
+
+<div class="" id="send">
+  <a>結果を送る</a>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/7.2.1/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+<script>
+$(function() {
+
+  $('#btn1,#btn2').click(function() {
+      $('#question1').animate({opacity: 0}, 500,function(){
+      $('#question1').css('display','none');
+      $('#question2').css('display','block');
+      $('#question2').animate({opacity: 1}, 1000);  
+    });
+  });
+  $('#btn3,#btn4').click(function() {
+      $('#question2').animate({opacity: 0}, 500,function(){
+      $('#question2').css('display','none');
+      $('#question3').css('display','block');
+      $('#question3').animate({opacity: 1}, 1000);  
+    });
+  });
+  $('#btn5,#btn6').click(function() {
+      $('#question3').animate({opacity: 0}, 500,function(){
+      $('#question3').css('display','none');
+      $('#question4').css('display','block');
+      $('#question4').animate({opacity: 1}, 1000);  
+    });
+  });
+  $('#btn7,#btn8').click(function() {
+      $('#question4').animate({opacity: 0}, 500,function(){
+      $('#question4').css('display','none');
+      $('#question5').css('display','block');
+      $('#question5').animate({opacity: 1}, 1000);  
+    });
+  });
+  $('#btn9,#btn10').click(function() {
+      $('#question5').animate({opacity: 0}, 500,function(){
+      $('#question5').css('display','none');
+      $('#question6').css('display','block');
+      $('#question6').animate({opacity: 1}, 1000);  
+    });
+  });
+  $('#btn11,#btn12').click(function() {
+      $('#question6').animate({opacity: 0}, 500,function(){
+      $('#question6').css('display','none');
+      $('#question7').css('display','block');
+      $('#question7').animate({opacity: 1}, 1000);  
+    });
+  });
+  $('#btn13,#btn14').click(function() {
+      $('#question7').animate({opacity: 0}, 500,function(){
+      $('#question7').css('display','none');
+      $('#question8').css('display','block');
+      $('#question8').animate({opacity: 1}, 1000);  
+    });
+  });
+  $('#btn15,#btn16').click(function() {
+      $('#question8').animate({opacity: 0}, 500,function(){
+      $('#question8').css('display','none');
+      $('#send').css('display','block');
+      $('#send').animate({opacity: 1}, 1000);  
+    });
+  });
+});
+
+// ------------------ファイヤベースの設定------------------
+  var config = {
+    apiKey: "AIzaSyBMACEXOMDPhdwxnrNbo6jGBmUlWvaEZmc",
+        authDomain: "mycoach-ee9ed.firebaseapp.com",
+        databaseURL: "https://mycoach-ee9ed.firebaseio.com",
+        projectId: "mycoach-ee9ed",
+        storageBucket: "mycoach-ee9ed.appspot.com",
+        messagingSenderId: "612660781279",
+        appId: "1:612660781279:web:40c064d322227e1348c96a"
+  };
+  firebase.initializeApp(config);
+  // firebase.analytics();
+
+  const database = firebase.database().ref();
+  let userId, userName,userImg;
+
+// ------------------ログインのチェックをします------------------
+
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          user = firebase.auth().currentUser;
+          userId = user.uid;
+          userName = user.displayName;
+          userImg = user.photoURL;
+          console.log(user);
+      } else {
+          //Not Login
+          redirect("mycoach.html");
+      }
+  });
+
+// ---------------ファイヤベースへのデータ------------------
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth()+1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const second = date.getSeconds() ;
+  const time = `${year}/${month}/${day}  ${hour}:${minutes}  ${second}`;
+
+  $(function() {
+
+    $('.btn1').on('click', function(){
+      var personality_1 =  $(this).attr("value");
+      console.log(personality_1);
+    
+    $('.btn2').on('click', function(){
+        var personality_2 =  $(this).attr("value");
+        console.log(personality_2);
+    
+    $('.btn3').on('click', function(){
+        var personality_3 =  $(this).attr("value");
+        console.log(personality_3);
+   
+    $('.btn4').on('click', function(){
+        var personality_4 =  $(this).attr("value");
+        console.log(personality_4);
+  
+    $('.btn5').on('click', function(){
+        var personality_5 =  $(this).attr("value");
+        console.log(personality_5);
+    
+    $('.btn6').on('click', function(){
+        var personality_6 =  $(this).attr("value");
+        console.log(personality_6);
+   
+    $('.btn7').on('click', function(){
+        var personality_7 =  $(this).attr("value");
+        console.log(personality_7);
+
+    $('.btn8').on('click', function(){
+        var personality_8 =  $(this).attr("value");
+        console.log(personality_8);
+        
+    $("#send").on("click",function(){
+        setTimeout(function(){
+          window.location.href = 'mycoach_2.html';
+        }, 1000);
+        
+      database.push({
+        per01:personality_1,
+        per02:personality_2,
+        per03:personality_3,
+        per04:personality_4,
+        per05:personality_5,
+        per06:personality_6,
+        per07:personality_7,
+        per08:personality_8,
+        time:time
+      });
+    });
+  });
+});
+});
+});
+});
+});
+});
+});
+});
+
+
+
+
+
+</script>
+</body>
+</html>

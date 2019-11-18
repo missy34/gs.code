@@ -1,0 +1,63 @@
+/* body {
+    font-family: 'Staatliches', cursive;
+} */
+
+body {
+    position: relative;
+}
+
+
+.log {
+    position: absolute;
+    top: 30%;
+    left: 72%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    width:50%;
+    color: rgb(31, 229, 255);
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+.log img{
+    width:70%;
+}
+
+#top {
+    width: 48%;
+}
+
+a{
+    position: absolute;
+    top: 95%;
+    left: 20%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    font-size: 8px;
+    color: rgb(96, 231, 255);
+    z-index: 10;
+}
+
+.firebaseui-idp-button {
+    max-width: 200px;
+    min-height: 65px;
+
+}
+
+#firebaseui-auth-container{
+    position: absolute;
+    top: 68%;
+    left: 69.5%;
+    width: 100%;
+    -ms-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    margin:30px;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    
+}

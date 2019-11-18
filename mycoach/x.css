@@ -1,0 +1,115 @@
+body{
+    font-family:'Roboto','Noto Sans JP', "游ゴシック体", "Yu Gothic", "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+}
+
+
+#logo{
+    width: 40%;
+    margin: 20px auto 10px;
+}
+
+#logo,p{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.top p{
+    padding-bottom:30px;
+    color: rgb(64, 145, 232);
+    line-height: 30px;
+    letter-spacing:2px;
+    font-size: 20px;
+    margin: auto;
+}
+
+p{
+    font-size: 20px;
+    color:rgb(0, 94, 194);
+}
+
+#num{
+    color: rgb(64, 145, 232);
+    font-size: 16px;
+}
+
+
+input{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: none;
+    color: white;
+    font-weight: bold;
+    background-color:  rgb(64, 145, 232);
+    font-size: 25px;
+    margin: 40px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(0, 94, 194);
+    outline:0;
+}
+
+input:hover{
+    opacity: 0.8;
+}
+
+input:active{
+    box-shadow: 0 0 1px rgb(0, 94, 194);
+    background-color:  rgb(0, 56, 176);
+}
+
+#q01{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: white;
+    height: 300px;
+}
+
+#q02,#q03,#q04,#q05,#q06,#q07,#q08{
+    display: none;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: white;
+    height: 300px;
+}
+
+@media(max-width:850px){
+
+    #logo{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 55%;
+        margin: 70px auto;
+    }
+    .top p{
+        padding-bottom:40px;
+        line-height: 20px;
+        letter-spacing:1px;
+        font-size: 15px;
+    }
+
+    p{
+        font-size: 15px;
+        color:rgb(0, 94, 194);
+    }
+
+    .btn{
+        width: 110px;
+        height: 110px;
+        font-size: 18px;
+        margin: 80px 15px 15px 15px;
+    }
+
+    #num{
+        margin: 50px auto;
+    }
+
+    footer{
+        font-size: 15px;
+    
+    }
+
+}

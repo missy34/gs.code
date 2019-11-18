@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <title>mishiMap</title>
+    <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+    <link rel="stylesheet" href="css/gmaps_login.css">
+    <link rel="icon" type="" href="fav.png">
+
+</head>
+
+<body>
+    <div class="tittle">
+        <img src="52108.png" alt="" id="top">
+        <div class="log">
+            <img src="logo.png" alt="" id="logo">
+            <p>Welcome mishiMap!!<br>このサイトは大人のデートや会食で使える<br>厳選された飲食店を掲載しています</p>
+        </div>
+        
+    </div>
+    
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+
+    <a href="https://jp.freepik.com/free-photos-vectors/technology">Studiogstock - jp.freepik.com によって作成された technology ベクトル</a>
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+            apiKey: "AIzaSyAXq2dA7ssohkYmtlibmquGVajMaiM0dtc",
+            authDomain: "gmaps-2a2a8.firebaseapp.com",
+            databaseURL: "https://gmaps-2a2a8.firebaseio.com",
+            projectId: "gmaps-2a2a8",
+            storageBucket: "gmaps-2a2a8.appspot.com",
+            messagingSenderId: "95780086900",
+            appId: "1:95780086900:web:859c1d3925e2fcadeedd21"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script type="text/javascript">
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        var uiConfig = {
+            callbacks: {
+                signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+                    return true;
+                },
+                uiShown: function () {
+                    document.getElementById('loader').style.display = 'none';
+                }
+            },
+            signInFlow: 'popup',
+            signInSuccessUrl: 'gmaps_3.html',
+            signInOptions: [
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            ],
+        };
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+</body>
+
+</html>

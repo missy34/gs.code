@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>mycoach</title>
+        <link rel="icon" type="" href="img/fav2.png">
+        <link rel="stylesheet" href="x.css">
+        <link rel="stylesheet" href="reset.css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+</head>
+<body>
+<div class="top">
+        <img src="img/mycoach-logo (2).png" alt="" id="logo">
+        <p>マイコーチとの相性を診断中…</p>
+ </div>
+
+    <form id="q01" class="selected">
+        <p>あなたは性格は？</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q01_1" value="外交的">
+        <input type="button" name="q01_2" value="内向的">
+        <div id="num">1 / 8</div>
+    </form>
+    <form id="q02">
+        <p>あなたは性格は？</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q02_1" value="論理的">
+        <input type="button" name="q02_2" value="感情的">
+        <div id="num">2 / 8</div>
+    </form>
+    <form id="q03">
+        <p>あなたは性格は？</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q03_1" value="挑戦的">
+        <input type="button" name="q03_2" value="安定的">
+        <div id="num">3 / 8</div>
+
+    </form>
+    <form id="q04">
+        <p>あなたは性格は？</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q04_1" value="リーダー">
+        <input type="button" name="q04_2" value="サポーター">
+        <div id="num">4 / 8</div>
+    </form>
+    <form id="q05">
+        <p>あなたは仕事感は</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q05_1" value="過程重視">
+        <input type="button" name="q05_2" value="結果重視">
+        <div id="num">5 / 8</div>
+    </form>
+    <form id="q06">
+        <p>あなたは仕事感は</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q06_1" value="チーム志向">
+        <input type="button" name="q06_2" value="個人志向">
+        <div id="num">6 / 8</div>
+    </form>
+    <form id="q07">
+        <p>あなたは仕事感は</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q07_1" value="専門職志向">
+        <input type="button" name="q07_2" value="管理職志向">
+        <div id="num">7 / 8</div>
+    </form>
+    <form id="q08">
+        <p>あなたは仕事感は</p>
+        <p>＿＿＿＿</p>
+        <input type="button" name="q08_1" value="仕事重視">
+        <input type="button" name="q08_2" value="家庭重視">
+        <div id="num">8 / 8</div>
+    </form>
+    
+    <!-- <div id="complete">
+    <p>アンケートにご協力いただきありがとうございました。</p>
+    </div> -->
+
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.1/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+<script>
+
+$(function () {
+  $('input[type=button]').click(function() {
+    // 現在のID
+    var current_id = $(this).parent().attr('id');
+
+    // hidden生成
+    var input = '<input type=\"hidden\" name=\"' + current_id + '\">';
+    $('#answer').append(input);
+    $('input[name=' + current_id + ']').val($(this).attr('name'));
+
+    // 次IDを抽出
+    var next_number = Number(current_id.match(/[0-9]{2}/)) + 1; 
+
+    // 10以下は0を付ける
+    if (next_number < 10) {
+      next_number = '0' + next_number.toString();
+   }
+
+    // IDを次IDに置換 
+    var next_id = current_id.replace(/[0-9]{2}/, next_number);     
+
+    // 次画面を表示
+    setTimeout(function(){
+      $('#' + current_id).fadeOut('fast', function() {
+        if ($('#' + next_id).is('*')) {
+          // 次フォーム
+          $('#' + next_id).addClass('selected');
+        } else {
+          // 送信
+          sendAnswer();
+          // 完了
+          $('#complete').addClass('selected');
+        }
+      });
+    },300);    
+  });
+
+  function sendAnswer() {
+    // POSTを生成
+    var data = {};
+    $('input[type=hidden]').each(function(){
+      data[$(this).attr('name')] = $(this).val();
+    });
+
+    (略)
+  }
+  
+});
+
+// ------------------ファイヤベースの設定------------------
+  var config = {
+    apiKey: "AIzaSyBMACEXOMDPhdwxnrNbo6jGBmUlWvaEZmc",
+        authDomain: "mycoach-ee9ed.firebaseapp.com",
+        databaseURL: "https://mycoach-ee9ed.firebaseio.com",
+        projectId: "mycoach-ee9ed",
+        storageBucket: "mycoach-ee9ed.appspot.com",
+        messagingSenderId: "612660781279",
+        appId: "1:612660781279:web:40c064d322227e1348c96a"
+  };
+  firebase.initializeApp(config);
+  // firebase.analytics();
+
+  const database = firebase.database().ref();
+  let userId, userName,userImg;
+
+// ------------------ログインのチェックをします------------------
+
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          user = firebase.auth().currentUser;
+          userId = user.uid;
+          userName = user.displayName;
+          userImg = user.photoURL;
+          console.log(user);
+      } else {
+          //Not Login
+          redirect("mycoach.html");
+      }
+  });
+
+// ---------------ファイヤベースへのデータ------------------
+
+
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth()+1;
+  const day = date.getDate();
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const second = date.getSeconds() ;
+  const time = `${year}/${month}/${day}  ${hour}:${minutes}  ${second}`;
+
+
+// database.push({
+//       personality_1:personality_1,
+//       personality_2:personality_2,
+//       personality_3:personality_3,
+//       personality_4:personality_4,
+//       personality_5:personality_5,
+//       personality_6:personality_6,
+//       personality_7:personality_7,
+//       personality_8:personality_8,
+//       time:time,
+//     });
+//   });
+  // $(function() {
+
+  //   database.push({
+    
+
+  //   });
+
+  // });
+
+  //   $('.btn2').on('click', function(){
+  //     var seikaku2 =  $(this).attr("value");
+  //   });
+  //   $('.btn3').on('click', function(){
+  //     var seikaku3 =  $(this).attr("value");
+  //   });
+  //   $('.btn4').on('click', function(){
+  //     var seikaku4 =  $(this).attr("value");
+  //   });
+  //   $('.btn5').on('click', function(){
+  //     var seikaku5 =  $(this).attr("value");
+  //   });
+  //   $('.btn6').on('click', function(){
+  //     var seikaku6 =  $(this).attr("value");
+  //   });
+  //   $('.btn7').on('click', function(){
+  //     var seikaku7 =  $(this).attr("value");
+  //   });
+  //   $('.btn8').on('click', function(){
+  //     var seikaku8 =  $(this).attr("value");
+
+  //   });
+
+  // });
+
+  //   database.push({
+  //     seikaku1:$("#btn1").val(),
+  //     seikaku2:$("#btn2").val(),
+  //     seikaku3:$("#btn3").val(),
+  //     seikaku4:$("#btn4").val(),
+  //     seikaku5:$("#btn5").val(),
+  //     seikaku6:$("#btn6").val(),
+  //     seikaku7:$("#btn7").val(),
+  //     seikaku8:$("#btn8").val(),
+  //     time:time,
+  // });
+  
+    // database.push({
+    //   seikaku1:$("#btn1").val(),
+    //   seikaku2:$("#btn2").val(),
+    //   seikaku3:$("#btn3").val(),
+    //   seikaku4:$("#btn4").val(),
+    //   seikaku5:$("#btn5").val(),
+    //   seikaku6:$("#btn6").val(),
+    //   seikaku7:$("#btn7").val(),
+    //   seikaku8:$("#btn8").val(),
+    //   seikaku9:$("#btn9").val(),
+    //   seikaku10:$("#btn10").val(),
+    //   seikaku11:$("#btn11").val(),
+    //   seikaku12:$("#btn12").val(),
+    //   seikaku13:$("#btn13").val(),
+    //   seikaku14:$("#btn14").val(),
+    //   seikaku15:$("#btn15").val(),
+    //   seikaku16:$("#btn16").val(),
+    //   seikaku17:$("#btn17").val(),
+    //   seikaku18:$("#btn18").val(),
+    //   time:time,
+    //   });
+    //   $("#name").val("");
+    //   $("#store").val("");
+    //   $("#genre").val("");
+    //   $("#price").val("");
+    //   $("#lat").val("");
+    //   $("#lng").val("");
+    
+
+
+</script>
+</body>
+</html>

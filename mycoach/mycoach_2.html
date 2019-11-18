@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>mycoach</title>
+        <link rel="icon" type="" href="img/fav2.png">
+        <link rel="stylesheet" href="mycoach_2.css">
+        <link rel="stylesheet" href="reset.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+</head>
+<body>
+
+    <div class="top">
+        <img src="img/mycoach-logo (2).png" alt="" id="logo">
+        <p>マイコーチを選択してください</p>
+    </div>
+
+        
+    <div id="coachs">
+        <div class="clearfix">
+            <div class="coach">
+                <img src="img/yumi.murata_list.png" alt="">
+                <div id="name" class="name01">村田 有美<br>Yumi Murata</div>
+                    <div id="strength">
+                        <a>#女性</a>
+                        <a>#美容</a>
+                        <a>#リーダーシップ</a>
+                    </div>
+            </div>
+            <div class="coach">
+                <img src="img/m-kato_list.png" alt="">
+                <div id="name" class="name02">加藤美季<br>Miki Kato</div>
+                <div id="strength">
+                        <a>#営業</a>
+                        <a>#30代</a>
+                        <a>#育児中</a>
+                </div>
+            </div>
+            <div class="coach">
+                <img src="img/rikako.zama_list.png" alt="">
+                <div id="name" class="name03">座間 理花子<br>Rikako Zama</div>
+                <div id="strength">
+                        <a>#労務</a>
+                        <a>#キャリア</a>
+                        <a>#人事</a>
+                </div>
+            </div>
+        </div>
+        <div class="popup01">
+            <div class="content">
+                <p>村田 有美</p>
+                <img id="batsu" src="img/close.png" alt="">
+                <img src="https://type.woman-agent.jp/images/adviser/yumi.murata_sub.jpg" alt="">
+                <h3>
+                ファーストキャリアは、美容に興味があったことと人と深く関わった業務を行えることに魅力を感じ、新卒でエステ業界へ入社。エステの施術だけではなく、カウンセリングから最適な通い方、プランニング、商品の提案を行ってきたが、結婚、主人の転勤というライフイベントをきっかけに転職を決意。これまでの経験をさらにビジネスの場で活かせると思いのパーソナルコーチへ転身した。</h3>
+                <button id="close01">このコーチを選ぶ</button>
+            </div>
+        </div>
+        <div class="popup02">
+            <div class="content">
+                <p>加藤美季</p>
+                <img id="batsu" src="img/close.png" alt="">
+                <img src="https://type.woman-agent.jp/images/adviser/m-kato_sub.jpg" alt="">
+                <h3>
+                大学卒業後、サービス業のマネージャーとして、数字管理・人員管理・採用・教育などを一通り経験。これまでの経験をさらにビジネスの場で活したいと考え、パーソナルコーチへ転身。心がけていることとしては、まず仕事やキャリアの不安を払拭すること。悩みや不安を一つ一つ整理しながら、前向きな気持ちを持っていただくことをサポートします。輝かしい未来への後押しをしたいと思っています。</h3>
+                <button id="close02">このコーチを選ぶ</button>
+            </div>
+        </div>
+        <div class="popup03">
+            <div class="content">
+                <p>座間 理花子</p>
+                <img id="batsu" src="img/close.png" alt="">
+                <img src="https://type.woman-agent.jp/images/adviser/rikako.zama_sub.jpg" alt="">
+                <h3>
+                前職は外資系アパレルブランドに勤務。約60名のメンバーマネージメントを経験し、店舗のサービス力の底上げに従事。売上・在庫管理・人材育成をしながら、販売員全員が楽しんで働ける職場環境作りと売場づくりを実施。これまでの経験をさらにビジネスの場で活かせると思いのパーソナルコーチへ転身した。ご本人が気づいておられない業務上の強みや、潜在的な強みに気づいていただけるような面談をするようにしています。</h3>
+                <button id="close03">このコーチを選ぶ</button>
+            </div>
+        </div>
+
+    </div>
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.1/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+
+var timer;
+$(function() {
+  var count = $("#coachs div.coach").length;
+  var index = 0;
+  timer = setInterval(function() {
+    $("#coachs div.coach").eq(index).show(500);
+    index ++;
+    if(index == count) {
+      clearInterval(timer);
+    };
+  }, 500);   
+});
+
+
+$('.name01').on('click',function(){
+    $('.popup01').addClass('show').fadeIn();
+});
+$('#close01,#batsu').on('click',function(){
+    $('.popup01').fadeOut();
+});
+
+$('.name02').on('click',function(){
+    $('.popup02').addClass('show').fadeIn();
+});
+$('#close02,#batsu').on('click',function(){
+    $('.popup02').fadeOut();
+});
+
+$('.name03').on('click',function(){
+    $('.popup03').addClass('show').fadeIn();
+});
+$('#close03,#batsu').on('click',function(){
+    $('.popup03').fadeOut();
+});
+
+$('button').on('click',function(){
+    setTimeout(function(){
+          window.location.href = 'mycoach_3.html';
+        }, 500);
+});
+
+
+// ------------------ファイヤベースの設定------------------
+var config = {
+    apiKey: "AIzaSyBMACEXOMDPhdwxnrNbo6jGBmUlWvaEZmc",
+        authDomain: "mycoach-ee9ed.firebaseapp.com",
+        databaseURL: "https://mycoach-ee9ed.firebaseio.com",
+        projectId: "mycoach-ee9ed",
+        storageBucket: "mycoach-ee9ed.appspot.com",
+        messagingSenderId: "612660781279",
+        appId: "1:612660781279:web:40c064d322227e1348c96a"
+  };
+  firebase.initializeApp(config);
+  // firebase.analytics();
+
+  const database = firebase.database().ref();
+  let userId, userName,userImg;
+
+// ------------------ログインのチェックをします------------------
+
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          user = firebase.auth().currentUser;
+          userId = user.uid;
+          userName = user.displayName;
+          userImg = user.photoURL;
+          console.log(user);
+      } else {
+          //Not Login
+          redirect("mycoach.html");
+      }
+  });
+
+// ---------------ファイヤベースへのデータ------------------
+</script>
+
+
+</body>
+</html>

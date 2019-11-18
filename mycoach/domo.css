@@ -1,0 +1,14 @@
+.btn {
+    background-color: #fbafaf;
+    border-bottom: solid 2px #ca2c2c;
+    color: #fff;
+    display: inline-block;
+    font-size: 32px;
+    font-weight: bold;
+    margin-right: 15px;
+    padding: 5px 10px;
+  }
+  /* activeクラス */
+  .active {
+    background-color: #ff5555;
+  }

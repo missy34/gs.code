@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="map_canvas1"></div>
+    <div class="map_canvas2"></div>
+    <div class="map_canvas3"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3kx-qpNmBNAgwpNDWE8YwiUJXfhcUZ7Y&libraries=places&callback=initialize"
+async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3kx-qpNmBNAgwpNDWE8YwiUJXfhcUZ7Y&callback=initialize"
+async defer></script>
+    
+    <script>
+        function initialize() {
+            var latlng1 = new google.maps.LatLng(35.664494, 139.709796);
+            var latlng2 = new google.maps.LatLng(35.666446, 139.714346);
+            var latlng3 = new google.maps.LatLng(35.662831, 139.712585);
+           
+            var opts1 = {
+              zoom: 13,
+              center: latlng1,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+           
+            var opts2 = {
+              zoom: 13,
+              center: latlng2,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+           
+            var opts3 = {
+              zoom: 13,
+              center: latlng3,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+           
+            var map1 = new google.maps.Map(document.getElementById("map_canvas1"), opts1);
+            var marker1 = new google.maps.Marker({
+              position: latlng1,   //マーカーの位置
+              map: map1,   //表示する地図
+              title: "東京本社"   //ロールオーバー テキスト
+             });
+            var map2 = new google.maps.Map(document.getElementById("map_canvas2"), opts2);
+            var marker2 = new google.maps.Marker({
+              position: latlng2,   //マーカーの位置
+              map: map2,   //表示する地図
+              title: "大阪支店"   //ロールオーバー テキスト
+             });
+            var map3 = new google.maps.Map(document.getElementById("map_canvas3"), opts3);
+            var marker3 = new google.maps.Marker({
+              position: latlng3,   //マーカーの位置
+              map: map3,   //表示する地図
+              title: "福岡営業所"   //ロールオーバー テキスト
+             });
+          }
+        </script>
+</body>
+</html>

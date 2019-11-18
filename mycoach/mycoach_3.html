@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>mycoach</title>
+        <link rel="icon" type="" href="img/fav2.png">
+        <link rel="stylesheet" href="mycoach_3.css">
+        <link rel="stylesheet" href="reset.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+</head>
+<body>
+
+<div class="main">
+
+    <header id="header">
+        <img src="img/mycoach-logo-white.png" alt="">
+        <p class="text1">●セルフノート</p>
+        <p class="text2">●プロフィール</p>
+        <p class="text3">●コーチと面談する</p>
+        <p class="text4">●Image Analysis</p>
+    </header>
+
+    <div class="container">
+        <div class="title">
+            <p>セルフノート</p>
+            <h2>あなたは３年後、どういう状態になっていたいですか？<br>
+                将来のイメージがハッキリすると、現状と目指す姿の中でギャップが生じます。<br>
+                マイコーチとの面談を通して、あなたの悩みや次のアクションを整理しましょう。</h2>
+
+        </div>
+        <div id="can" class="wcm">
+            <h1>CAN</h1>
+            <ul>
+                <li v-for="(can, index) in cans">
+                <input type="checkbox" v-model="can.isDone">
+                <span :class="{done: can.isDone}">{{ can.title }}</span>
+                <span @click="deleteItem(index)" class="command">[x]</span>
+                </li>
+                <li v-show="!cans.length">記載項目がありません</li>
+            </ul>
+            <form @submit.prevent="addItem">
+                <input type="text" v-model="newItem">
+                <input type="submit" value="追加">
+            </form>
+        </div>
+
+        <div id="app" class="wcm">
+            <h1>
+                <button @click="purge">削除</button>
+                MUST
+                <span class="info">({{ remaining.length }}/{{ todos.length }})</span>
+            </h1>
+            <ul>
+                <li v-for="(todo, index) in todos">
+                <input type="checkbox" v-model="todo.isDone">
+                <span :class="{done: todo.isDone}">{{ todo.title }}</span>
+                <span @click="deleteItem(index)" class="command">[x]</span>
+                </li>
+                <li v-show="!todos.length">記載項目がありません</li>
+            </ul>
+            <form @submit.prevent="addItem">
+                <input type="text" v-model="newItem">
+                <input type="submit" value="追加">
+            </form>
+        </div>
+
+        <div id="will" class="wcm">
+            <h1>WILL</h1>
+            <ul>
+                <li v-for="(will, index) in wills">
+                <input type="checkbox" v-model="will.isDone">
+                <span :class="{done: will.isDone}">{{ will.title }}</span>
+                <span @click="deleteItem(index)" class="command">[x]</span>
+                </li>
+                <li v-show="!wills.length">記載項目がありません</li>
+            </ul>
+            <form @submit.prevent="addItem">
+                <input type="text" v-model="newItem">
+                <input type="submit" value="追加">
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="js/main.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.1/firebase.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+
+
+// ------------------ファイヤベースの設定------------------
+var config = {
+    apiKey: "AIzaSyBMACEXOMDPhdwxnrNbo6jGBmUlWvaEZmc",
+        authDomain: "mycoach-ee9ed.firebaseapp.com",
+        databaseURL: "https://mycoach-ee9ed.firebaseio.com",
+        projectId: "mycoach-ee9ed",
+        storageBucket: "mycoach-ee9ed.appspot.com",
+        messagingSenderId: "612660781279",
+        appId: "1:612660781279:web:40c064d322227e1348c96a"
+  };
+  firebase.initializeApp(config);
+  // firebase.analytics();
+
+  const database = firebase.database().ref();
+  let userId, userName,userImg;
+
+// ------------------ログインのチェックをします------------------
+
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          user = firebase.auth().currentUser;
+          userId = user.uid;
+          userName = user.displayName;
+          userImg = user.photoURL;
+          console.log(user);
+      } else {
+          //Not Login
+          redirect("mycoach.html");
+      }
+  });
+
+// ---------------ファイヤベースへのデータ------------------
+</script>
+
+
+</body>
+</html>

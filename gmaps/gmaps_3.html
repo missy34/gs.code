@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+    <title>mishiMap</title>
+    <link rel="icon" type="" href="fav.png">
+    <link rel="stylesheet" href="css/gmaps_3.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/start/jquery-ui.css" rel="stylesheet">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+
+<style>
+
+    </style>
+</head>
+<body>
+    <div class="top">
+        <img src="logo.png" alt="">
+        <ul>
+            <li ><a href="#omotesando" style="text-decoration:none;">表参道</a></li>
+            <li><a href="#ebisu" style="text-decoration:none;">恵比寿</a></li>
+            <li><a href="#shinjyuku" style="text-decoration:none;">新宿</a></li>
+            <li><a href="#kagurazaka" style="text-decoration:none;">神楽坂</a></li>
+            <li><a href="#nishiazabu" style="text-decoration:none;">西麻布</a></li>
+            <li><a href="#nakameguro" style="text-decoration:none;">中目黒</a></li>
+        </ul>
+        <button id="post">投稿する</button>
+
+    </div>
+    
+    <div id="main">
+        <div class="area">
+            <a id="omotesando" class="anchor">表参道</a>
+            <div id="map1" class="map"></div>
+        </div>
+        <div class="area">
+            <a id="ebisu" class="anchor">恵比寿</a>
+            <div id="map2" class="map"></div>
+        </div>
+        <div class="area">
+            <a id="shinjyuku" class="anchor">新宿</a>
+            <div id="map3" class="map"></div>
+        </div>
+        <div class="area">
+            <a id="kagurazaka" class="anchor">神楽坂</a>
+            <div id="map4" class="map"></div>
+        </div>
+        <div class="area">
+            <a id="nishiazabu" class="anchor">西麻布</a>
+            <div id="map5" class="map"></div>
+        </div>
+        <div class="area">
+            <a id="nakameguro" class="anchor">中目黒</a>
+            <div id="map6" class="map"></div>
+        </div>
+    </div>
+
+    <div class="content" id="dialog" title="投稿ありがとうございます">
+        <!-- <div id="output"></div> -->
+        <input id="name" autocomplete="off"  placeholder="ニックネーム">
+        <input id="store" autocomplete="off"  placeholder="お店名">
+        <select id="genre">
+            <option>ジャンルを選択</option>
+            <option>寿司</option>
+            <option>割烹・懐石</option>
+            <option>居酒屋</option>
+            <option>焼き鳥</option>
+            <option>和食</option>
+            <option>Bar</option>
+            <option>イタリア料理</option>
+            <option>スペイン料理</option>
+            <option>ビストロ</option>
+            <option>中華料理</option>
+        </select>
+        <select id="price">
+            <option>価格帯を選択</option>
+            <option>3,000-4,000円/人</option>
+            <option>4,000-5,000円/人</option>
+            <option>5,000-6,000円/人</option>
+            <option>6,000-8,000円/人</option>
+            <option>8,000-10,000円/人</option>
+            <option>10,000-15,000円/人</option>
+            <option>15,000-20,000/人</option>
+            <option>20,000-30,000円/人</option>
+        </select>
+        <input id="lat" autocomplete="off"  placeholder="緯度">
+        <input id="lng" autocomplete="off"  placeholder="経度">
+        <div>
+          <!-- autocomplete="off"でformの候補をなくす -->
+            <form autocomplete="off" id="picture" action="" method="post" enctype="multipart/form-data">
+              <input type="file" id="setfile" name="upload_file" class="data file">
+              <br><br>
+              <span id="preview_area"></span>
+              <input id="send" type="submit" value="送信">
+              <br><br>
+            </form>
+            <div id="imgSample" style="width: 200px; height: 20px; background-size:100% auto; background-position : 50% 50%;"></div>
+            <p id="time"></p>
+        </div>
+
+        <!-- <form id="picture" action="" method="post" enctype="multipart/form-data">
+          画像プレビュー
+          <input type="file" name="upload_file" id="upload_file" class="data file">
+          <br><br>
+          <span id="preview_area"></span>
+          <br><br>
+        </form> -->
+
+        <!-- $('#upload_file').on('change', function(){ //ファイルが選択されるたびに動作するイベントハンドラ
+          var strFileInfo = $("#setfile")[0].files[0]; //jQueryでファイルオブジェクトを変数にセット
+          if(strFileInfo && strFileInfo.type.match('image.*')){ //選択されたファイルが画像であれば、処理を継続
+      
+            $('#preview').remove();  //表示中のプレビュー画像があれば、削除しておく
+            $('#preview_area').append('<img id="preview" width="260" />'); //横幅300pxの空の画像をプレビューエリアにセット
+      
+            fileReader = new FileReader(); //HTML5 のAPI である FileReader() メソッドを初期化
+            fileReader.onload = function(event){
+              $('#preview').attr('src', event.target.result);
+            }
+      
+            fileReader.readAsDataURL(strFileInfo); //ローカルフォルダから画像ファイルが読み込まれる
+          }
+      }); -->
+
+        <!-- <button id="send" type="submit">送信</button> -->
+    </div>
+
+    <footer>
+        <div class="copy">©mishiMap All Rights Reserved.</div>
+    </footer>
+            
+   
+
+
+<script src="https://www.gstatic.com/firebasejs/7.2.1/firebase.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script> -->
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.1/firebase-analytics.js"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?language=ja&region=JP&key=AIzaSyB3kx-qpNmBNAgwpNDWE8YwiUJXfhcUZ7Y&callback=initialize" async defer></script> -->
+<script src="https://maps.google.com/maps/api/js?language=ja&region=JP&key=AIzaSyB3kx-qpNmBNAgwpNDWE8YwiUJXfhcUZ7Y&sensor=true"></script>
+
+<script>
+
+// ------------------ファイヤベースの設定------------------
+  var config = {
+    apiKey: "AIzaSyAXq2dA7ssohkYmtlibmquGVajMaiM0dtc",
+          authDomain: "gmaps-2a2a8.firebaseapp.com",
+          databaseURL: "https://gmaps-2a2a8.firebaseio.com",
+          projectId: "gmaps-2a2a8",
+          storageBucket: "gmaps-2a2a8.appspot.com",
+          messagingSenderId: "95780086900",
+          appId: "1:95780086900:web:859c1d3925e2fcadeedd21"
+  };
+  firebase.initializeApp(config);
+  // firebase.analytics();
+
+  const database = firebase.database().ref();
+  let userId, userName,userImg;
+
+// ------------------ログインのチェックをします------------------
+
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+          user = firebase.auth().currentUser;
+          userId = user.uid;
+          userName = user.displayName;
+          userImg = user.photoURL;
+          console.log(user);
+      } else {
+          //Not Login
+          redirect("/gmaps_login.html");
+      }
+  });
+
+// ---------------ファイヤベースに写真保存------------------
+
+    const form = document.querySelector('form');
+    // setfileインスタンスを作成
+    const setfile = document.getElementById("setfile");
+    // CloudStorageインスタンスを作成
+    const storage = firebase.storage();
+    // imgSampleインスタンスを作成
+    const imgSample = document.getElementById("imgSample");
+
+    // グローバル変数を定義
+    var file_name;
+    var blob;
+
+    // setfileの変更で処理開始（変更があった要素がeで返される）
+    setfile.addEventListener("change", e => {
+    var file = e.target.files;
+    // fileの名前を取得
+    file_name = file[0].name;
+    // blob形式に変換
+    blob = new Blob(file, { type: "image/jpeg" });
+    console.warn(blob);
+    });
+
+    // submitで処理開始
+    form.addEventListener('submit', e => {
+    // ページ遷移をなくす
+    e.preventDefault();
+
+    // storageのarea_imagesへの参照を定義
+    var uploadRef = storage.ref('images/').child(file_name);
+    uploadRef.put(blob).then(snapshot => {
+    console.log(snapshot.state);
+    // アップロードしたファイルのurlを取得
+      uploadRef.getDownloadURL().then(url => {
+        // htmlに表示する
+          imgSample.style.backgroundImage = "url("+url+")";
+      }).catch(error => {
+          console.log(error);
+      });
+    });
+    // valueリセットする
+      file_name = '';
+      blob = '';
+    });
+
+
+
+// ---------------ファイヤベースへの保存------------------
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth()+1;
+  const day = date.getDate();
+  const time = `${year}/${month}/${day}`;
+
+  $("#send").on("click",function(){
+
+    database.push({
+      name:$("#name").val(),
+      store:$("#store").val(),
+      genre:$("#genre").val(),
+      price:$("#price").val(),
+      lat:$("#lat").val(),
+      lng:$("#lng").val(),
+      lng:$("#lng").val(),
+      setfile:$("#setfile").val(),
+      time:time,
+      });
+      $("#name").val("");
+      $("#store").val("");
+      $("#genre").val("");
+      $("#price").val("");
+      $("#lat").val("");
+      $("#lng").val("");
+      $("#setfile").val("");
+      $("#dialog").fadeOut();
+    });
+  
+
+// ---------------投稿するボタンの設置---------------
+
+  $("#post").on("click",function(){
+      $("#dialog").dialog();
+  });
+
+  // 中西の経度緯度  35.665579, 139.714383
+
+  
+// ------------------ここからMap------------------
+
+var infowindow = new google.maps.InfoWindow();
+
+function initialize() {
+
+  database.on("child_added",function(data){
+    const v = data.val();  //データ取得
+    const n = data.name; 
+    const s = data.store; 
+    const g = data.genre; 
+    const pr = data.price; 
+    const lat = data.lat; 
+    const lng = data.lng; 
+    const setfile = data.setfile;
+
+    console.log(v.lat,v.lng);
+
+    var point = new google.maps.LatLng(v.lat,v.lng);
+    var marker = create_maker(point, "info",'<p>'+v.store+'（'+v.genre+'） by'+v.name+'<br>'+v.price+'<pre>'+v.time+'に投稿</pre></p><img src="'+v.setfile+'">');
+  });
+
+  // ＿＿＿＿＿＿＿＿【1】＿＿＿＿＿＿＿＿＿
+  var option1 = {
+    zoom: 16,
+    center: new google.maps.LatLng(35.665140, 139.712516),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+  };
+
+  // 吹き出しを閉じる処理
+  map1 = new google.maps.Map(document.getElementById("map1"), option1);
+  google.maps.event.addListener(map1, "click", function() {infowindow.close();});
+
+  var point = new google.maps.LatLng(35.666018, 139.716969);
+    var marker = create_maker(point, "info", "<p>ラス（フランス料理）<br>8,000-10,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPEnM5dl0u7npt99HN6972COUMi0cQengwm3CCe=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.666446, 139.714346);
+    var marker = create_maker(point, "info", "<p>ミモザ（中華料理）<br>10,000-15,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNTH-t3N3yVmHRbd6hSrY5BmL09XvBuot_U_60j=w425-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.666931, 139.711917);
+    var marker = create_maker(point, "info", "<p>豊和（和食）<br>6,000-7,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNDgZqXGOoPeP7GtShbyPHQbtHQxRUq9skv9QH2=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.664494, 139.709796);
+    var marker = create_maker(point, "info", "<p>青山ゑびす堂（居酒屋）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMMmpqDN3py_Ym9QvLtgRYvCq4eFTYJpIIB844V=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.662831, 139.712585);
+    var marker = create_maker(point, "info", "<p>CICADA（地中海料理）<br>7,000-8,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOljxfA1R19bsRAPDcrKmDXwHtlafUf1zCN5gV_=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.670708, 139.713803);
+    var marker = create_maker(point, "info", "<p>ラ コッコラ（イタリア料理）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOVsbThCpzcM1hg-rtD0Xw8jJUSdHtx5NPiJDL9=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.663491, 139.712887);
+    var marker = create_maker(point, "info", "<p>TOKYO Whisky Library（Bar）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPtDk_aQFW9wGQNUgVMI7wx69lwuI2R_MN2heyM=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.664278, 139.711359);
+    var marker = create_maker(point, "info", "<p>鮨とみ田（寿司）<br>15,000-20,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipP4i8Z0vM1q3tDUl6AIXOtzZahy8lAsc1a-VIOa=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.664793, 139.714651);
+    var marker = create_maker(point, "info", "<p>PIZZA SLICE 2（イタリア料理）<br>2,000-3,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPwylT8QIk_PNLEBzcJ8kTZpmP6BlU4LyTTn4iE=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.664018, 139.710444);
+    var marker = create_maker(point, "info", "<p>KINTAN（焼き肉）<br>6,000-8,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMlTFKWzqJ3duhLV9XEzI_61_5CsW47BYi627bP=w408-h544-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.664083, 139.709443);
+    var marker = create_maker(point, "info", "<p>太月（割烹・懐石）<br>20,000-30,000円/人</p><img src='https://lh6.googleusercontent.com/proxy/_a5cCHyPtL61dv5okvMuKxxgTRXMJEsU56NlGrLYKwECEMkFWUuXzh8KTr_DY956DPyQO1udYYD8q3FhyQn9RvXOxQ48GDKLCQcygJK0Grq2QIw8Gx7KD7d3DzlCHXEzxxfIWGk-ap3YG3-Bfqi3k3WbHzthaw=w408-h408-k-no' id='photo'/>");
+
+
+// ＿＿＿＿＿＿＿＿【2】＿＿＿＿＿＿＿＿＿
+var option2 = {
+    zoom: 16,
+    center: new google.maps.LatLng(35.646687, 139.710276),
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+  };
+
+// 吹き出しを閉じる処理
+  map2 = new google.maps.Map(document.getElementById("map2"), option2);
+  google.maps.event.addListener(map2, "click", function() {infowindow.close();});
+
+    var point = new google.maps.LatLng(35.645731, 139.709696);
+    var marker = create_maker(point, "info", "<p>くおん（和食）<br>6,000-8,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOQ1OW-t8fO-Pp9nojZC4mDmL5eTt54KMaYDYAf=w408-h275-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.645848, 139.708854);
+    var marker = create_maker(point, "info", "<p>クンビラ（ネパール料理）<br>5,000-6,000円/人</p><img src='https://lh3.googleusercontent.com/proxy/eMn9qDAzqWIY_OpcdoUB3cUMa09gMVxSqikluYyoI6EJV5esYWcnunAXKMEdpBrX7Thc7QKnHG9Rh8PhV2aOniRU22lQ0rI4Meeyp1OBp6zFdWm8wQL8uUubFpsxlOGHm_gRpVTjx5wMmDgRVCIIupefrZs=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.646081, 139.708118);
+    var marker = create_maker(point, "info", "<p>松栄 恵比寿本店（寿司）<br>10,000-15,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMJgoxo1QzvkXNUMBUjNrBRGh9hk6Ayygs68Oxg=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.648042, 139.709088);
+    var marker = create_maker(point, "info", "<p>BISTRO Carnesio（ビストロ）<br>6,000-8,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMXMZJqQ5KO8z9fiU9JJEbCpjJ9flSUlkJzN3pK=w408-h543-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.646309, 139.711766);
+    var marker = create_maker(point, "info", "<p>カルネジーオ イースト（ビストロ）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMpXzRXnnnuF4FKdVmf7yMDZyknO0bwnWiTE0kI=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.648668, 139.711181);
+    var marker = create_maker(point, "info", "<p>Bar 松虎（Bar）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipM2sEU2-s0NWSbhXsekjkHWgMgmyoDRF38I3aQC=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.648464, 139.711877);
+    var marker = create_maker(point, "info", "<p>日本料理 雄（割烹・懐石）<br>10,000-15,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMM2ZNBWjm1hqBuGakQGkUsWVaFrpoTAmsUMfRu=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.645488, 139.714723);
+    var marker = create_maker(point, "info", "<p>TOLIUO（トリウオ）（スペイン料理）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMbCqDJEsUck_14CSMLBMqViOTnmJViEjPRTAQ-=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.645834, 139.707071);
+    var marker = create_maker(point, "info", "<p>BAR 松下 -Bar Matsushita-（BAR）<br>3,000-4,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMsOgeR7_IG4bKpX_pmxkbM-YDL1cjX69A9FNmn=w408-h291-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.643474, 139.710209);
+    var marker = create_maker(point, "info", "<p>喜鈴 別邸（焼き鳥）<br>8,000-10,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMdm04ZnGXnzvUjvxFnfoVLbSWMynlbua4K9T0m=w408-h326-k-no' id='photo'/>");
+
+  // ＿＿＿＿＿＿＿＿【3】＿＿＿＿＿＿＿＿＿
+    var option3 = {
+      zoom: 16,
+      center: new google.maps.LatLng(35.691135, 139.701488),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+    };
+
+  // 吹き出しを閉じる処理
+    map3 = new google.maps.Map(document.getElementById("map3"), option3);
+    google.maps.event.addListener(map3, "click", function() {infowindow.close();});
+
+    var point = new google.maps.LatLng(35.692876, 139.701572);
+    var marker = create_maker(point, "info", "<p>イーグル（Bar）<br>4,000-5,000円/人</p><img src='https://geo2.ggpht.com/cbk?panoid=JevWbf_DgiCZiPrBhGq_oA&output=thumbnail&cb_client=search.gws-prod.gps&thumb=2&w=408&h=240&yaw=20&pitch=-10&thumbfov=100' id='photo'/>");
+    var point = new google.maps.LatLng(35.692876, 139.705594);
+    var marker = create_maker(point, "info", "<p>日本酒スタンド 酛（居酒屋）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNVOmGYVc_KxnQ14i_jHuu7iDj80x2ioHS4H4Kq=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.690863, 139.706633);
+    var marker = create_maker(point, "info", "<p>SHINJYUKU SALOON NADNYE（スペイン料理）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPiSMGD66YSmRJb9PO_EwT1-2BYgkLBX2l8Ba_j=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.693020, 139.697827);
+    var marker = create_maker(point, "info", "<p>ろばた 翔（居酒屋）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMdn0nBeyjPgvEC92m3KX1AGXM0Tx_kY8YSNX3r=w408-h326-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.687961, 139.698895);
+    var marker = create_maker(point, "info", "<p>鳥茂（焼き鳥）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOgAkBhYcinI5vxcBn5d6ugUihNSbebpR5cHIR5=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.690225, 139.703999);
+    var marker = create_maker(point, "info", "<p>新宿割烹 中嶋（割烹・懐石）<br>10,000-15,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPiDWQZfcR7QG-9ZychLx5xViGaQVfoLB8eqmn-=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.692704, 139.702168);
+    var marker = create_maker(point, "info", "<p>サントリーラウンジ 昴（Bar）<br>3,000-4,000円/人</p><img src='https://geo2.ggpht.com/cbk?panoid=Qnel8rMwpUcR6kuKmZtssA&output=thumbnail&cb_client=search.gws-prod.gps&thumb=2&w=408&h=240&yaw=340&pitch=0&thumbfov=100' id='photo'/>");
+    var point = new google.maps.LatLng(35.694194, 139.705073);
+    var marker = create_maker(point, "info", "<p>ビストロPavo（スペイン料理）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOVsCsYlwvO8pRZdoLNwMCgQdOBlpy5bkou0ZDH=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.691258, 139.706379);
+    var marker = create_maker(point, "info", "<p>どん底 本店（スペイン料理）<br>4,000-5,000円/人</p><img src='https://lh3.googleusercontent.com/proxy/MPzdethTaoy0oYknn3duOglU9cK_89-sKi28tcuMeFbSmzG2zl7mYGvNKnQph3otiNN2zXU_br_r8BGl3doWR_u75-H63lehXwGAlPOavq8GQJnKbkwcVy4ndpNKnuq3uwif6e4nc3OVoolppZ65nDbyM04=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.691446, 139.702284);
+    var marker = create_maker(point, "info", "<p>茶茶白雨（和食）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNj02S0D1Mo1zlz_F6Z51KXmb8rvpq89XRDsmKt=w408-h408-k-no' id='photo'/>");
+
+  // ＿＿＿＿＿＿＿＿【4】＿＿＿＿＿＿＿＿＿
+    var option4 = {
+        zoom: 16.5,
+        center: new google.maps.LatLng(35.701955, 139.740874),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+
+  // 吹き出しを閉じる処理
+    map4 = new google.maps.Map(document.getElementById("map4"), option4);
+    google.maps.event.addListener(map4, "click", function() {infowindow.close();});
+
+    var point = new google.maps.LatLng(35.701718, 139.738488);
+    var marker = create_maker(point, "info", "<p>枝魯枝魯（割烹・懐石）<br>6,000-8,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOYH8lSWDIZ-cKWj1n-Nk7cqsRDFK5GKKqdLwvP=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.701786, 139.739651);
+    var marker = create_maker(point, "info", "<p>山さき（割烹・懐石）<br>10,000-15,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOjjPGoXWSMugFLV4WLblr4gU55Ob0nCYLLEf88=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.701961, 139.739576);
+    var marker = create_maker(point, "info", "<p>神楽坂 ちょい干してっ平（居酒屋）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMdyDcFqDQjOZkUUjpsDOPy7ipggdgfIipgQRRd=w408-h544-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.701846, 139.739530);
+    var marker = create_maker(point, "info", "<p>酒ト壽（居酒屋）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMEPKEwz-5xPx-4l4hPGtKVKQDEXVv6lqEqaDmt=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.701962, 139.740109);
+    var marker = create_maker(point, "info", "<p>焼鶏うぐいす（焼き鳥）<br>6,000-8,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPhIfZgX-sdP-WQ5GbhBvlvyX-tlGTGkTTtfUVl=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.701829, 139.741054);
+    var marker = create_maker(point, "info", "<p>千（割烹・懐石）<br>10,000-15,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOvFucz1LsSQ-6Sb3E36LSpOReTIdzuqiT_FVXC=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.700907, 139.740455);
+    var marker = create_maker(point, "info", "<p>メゾン・ド・ラ・ブルゴーニュ（フランス料理）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPkfvoLHFc9-yT0_mx7jNT4r8f-4KwGeZtv4FZJ=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.700410, 139.742053);
+    var marker = create_maker(point, "info", "<p>駒安（焼き鳥）<br>3,000-4,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipObzSmmxleRkGwoMKCeodCe1-B7qSLV1PGNesJG=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.702743, 139.740828);
+    var marker = create_maker(point, "info", "<p>BEER BAR Bitter（Bar）<br>3,000-4,000円/人</p><img src='https://lh3.googleusercontent.com/proxy/MPzdethTaoy0oYknn3duOglU9cK_89-sKi28tcuMeFbSmzG2zl7mYGvNKnQph3otiNN2zXU_br_r8BGl3doWR_u75-H63lehXwGAlPOavq8GQJnKbkwcVy4ndpNKnuq3uwif6e4nc3OVoolppZ65nDbyM04=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.701700, 139.741320);
+    var marker = create_maker(point, "info", "<p>坂の上レストラン（イタリア料理）<br>8,000-10,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNwRWkkm0i00KEvS7Xct3yghW92FsosiGIFu07y=w408-h271-k-no' id='photo'/>");
+
+    // ＿＿＿＿＿＿＿＿【5】＿＿＿＿＿＿＿＿＿
+    var option5 = {
+        zoom: 16.5,
+        center: new google.maps.LatLng(35.660638, 139.723873),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+
+    // 吹き出しを閉じる処理
+      map5 = new google.maps.Map(document.getElementById("map5"), option5);
+      google.maps.event.addListener(map5, "click", function() {infowindow.close();});
+
+
+    var point = new google.maps.LatLng(35.658433, 139.723942);
+    var marker = create_maker(point, "info", "<p>キャンティ（イタリア料理）<br>8,000-10,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMzlyHdI0HFGpD8xaffOIcxZnaLqQIEgIXMoQYl=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.658103, 139.724017);
+    var marker = create_maker(point, "info", "<p>バーフライングレディ（BAR）<br>3,000-4,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipM31GQsHl2IR70-p4OBtlle1v8hV86DW52Dylc=w408-h725-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.659359, 139.724069);
+    var marker = create_maker(point, "info", "<p>草思庵（韓国料理）<br>6,000-8,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPcTxzjmVOGTGop3T3B2TdP3rXXe9YFrd4Z-YFf=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.659489, 139.724948);
+    var marker = create_maker(point, "info", "<p>トルナヴェント（イタリア料理）<br>15,000-20,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipML25eCCmZFq6fOyKzPzCKDlOLHTFykayMIB0Ba=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.660415, 139.724305);
+    var marker = create_maker(point, "info", "<p>かぶいて候 そうろう（居酒屋）<br>4,000-5,000円/人</p><img src='https://geo2.ggpht.com/cbk?panoid=q0E8Yc6wNdsH6Cx1AhBgVg&output=thumbnail&cb_client=search.gws-prod.gps&thumb=2&w=408&h=240&yaw=320.50452&pitch=0&thumbfov=100' id='photo'/>");
+    var point = new google.maps.LatLng(35.660752, 139.724174);
+    var marker = create_maker(point, "info", "<p>フォードラゴン（ベトナム料理）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNLg_iS24c4cvXMeEVkCZx6Xcs30Pqsj2Nn0N29=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.662195, 139.726121);
+    var marker = create_maker(point, "info", "<p>鮨 きのした（寿司）<br>20,000-30,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMJ52eoxQOVPZ2KpcKMgQQetRn6H4SvH6MnXQ3V=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.661104, 139.722368);
+    var marker = create_maker(point, "info", "<p>西麻布 サル ドゥ マキノ-salledeMAKINO-（ビストロ）<br>10,000-15,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNj9Hqs5k3LBhrzFvxFjnIiaMx1cpTi753-XrdM=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.661032, 139.721843);
+    var marker = create_maker(point, "info", "<p>AZUR et MASA UEKI（ビストロ）<br>20,000-30,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipODPgAFHQIBWrPmFfvVdojCxuP7PEEciOvQrExU=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.661788, 139.721893);
+    var marker = create_maker(point, "info", "<p>笄鮨（寿司）<br>8,000-10,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipODPgAFHQIBWrPmFfvVdojCxuP7PEEciOvQrExU=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.660076, 139.722531);
+    var marker = create_maker(point, "info", "<p>USHIGORO S. Nishiazabu（焼き肉）<br>15,000-20,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMW_8pCWs1EwQMgfV8eO2RlgoJCzCPoxFTgVxfe=w408-h272-k-no' id='photo'/>");
+
+
+    // ＿＿＿＿＿＿＿＿【6】＿＿＿＿＿＿＿＿＿
+    var option6 = {
+        zoom: 16,
+        center: new google.maps.LatLng(35.644334, 139.698784),
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+
+    // 吹き出しを閉じる処理
+      map6 = new google.maps.Map(document.getElementById("map6"), option6);
+      google.maps.event.addListener(map6, "click", function() {infowindow.close();});
+
+    var point = new google.maps.LatLng(35.643861, 139.697842);
+    var marker = create_maker(point, "info", "<p>歩路庵 中目黒（和食）<br>8,000-10,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOLlK7FeHqMRmuvRJDaqNZuN36tg9VEqZUw4VER=w408-h240-k-no-pi-0-ya121.60371-ro-0-fo100' id='photo'/>");
+    var point = new google.maps.LatLng(35.642912, 139.699069);
+    var marker = create_maker(point, "info", "<p>聖林館（イタリア料理）<br>3,000-4,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipNFf84RnNcfy6_bIZEQe4hbLj5tef7OrJJl4vz_=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.642814, 139.699175);
+    var marker = create_maker(point, "info", "<p>いふう（割烹・懐石）<br>10,000-15,000円/人</p><img src='https://geo1.ggpht.com/cbk?panoid=m7EVveoPbtWx2FikToM1CA&output=thumbnail&cb_client=search.gws-prod.gps&thumb=2&w=408&h=240&yaw=140&pitch=-10&thumbfov=100' id='photo'/>");
+    var point = new google.maps.LatLng(35.642370, 139.699092);
+    var marker = create_maker(point, "info", "<p>鳥よし 中目黒店（焼き鳥）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipOj2OVk3l2ACcwWTxemrOZkwQ1ZuGTyJ23NYifA=w426-h240-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.640917, 139.694726);
+    var marker = create_maker(point, "info", "<p>トラットリア・クアトロ・ラガッツィ（イタリア料理）（居酒屋）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipP50uI6dZk_rYSv3y5QkyN_CVqQD4jtFe4W21cL=w408-h272-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.644598, 139.702290);
+    var marker = create_maker(point, "info", "<p>nakameguro 燻製 apartment（Bar）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPbehsVMw-4_Tl49trVjeaakV3RMbFbqxgT08PH=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.647201, 139.701757);
+    var marker = create_maker(point, "info", "<p>ごはんや 一芯 代官山（和食）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipMWIh7Xyf3fqEgmQNFDgCYDFJk5Vh9WM3KhN5ct=w408-h271-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.645218, 139.698418);
+    var marker = create_maker(point, "info", "<p>MARTE（イタリア料理）<br>20,000-30,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPnOPLiGCOrensEArmXky6f9k065ks5_urN4yg9=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.645359, 139.698306);
+    var marker = create_maker(point, "info", "<p>串若丸（焼き鳥）<br>4,000-5,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPknthUQlnTdXsbuZUrfUFmJhUPgxNg20YPz3LT=w408-h306-k-no' id='photo'/>");
+    var point = new google.maps.LatLng(35.643094, 139.701416);
+    var marker = create_maker(point, "info", "<p>ユイット（フレンチ料理）<br>5,000-6,000円/人</p><img src='https://lh5.googleusercontent.com/p/AF1QipPv5qjDbnJrODOnU_tdzXKVJuJGgdXBpmuZVCYM=w408-h408-k-no' id='photo'/>");
+
+}
+
+
+
+function create_maker(latlng, label, html) {
+  // マーカーを生成
+  var marker1 = new google.maps.Marker({position: latlng, map: map1, title: label});
+  // マーカーをマウスオーバーした時の処理
+    google.maps.event.addListener(marker1, "mouseover", function() {
+    infowindow.setContent(html);
+    infowindow.open(map1, marker1);
+    });
+  var marker2 = new google.maps.Marker({position: latlng, map: map2, title: label});
+    google.maps.event.addListener(marker2, "mouseover", function() {
+    infowindow.setContent(html);
+    infowindow.open(map2, marker2);
+    }); 
+  var marker3 = new google.maps.Marker({position: latlng, map: map3, title: label});
+    google.maps.event.addListener(marker3, "mouseover", function() {
+    infowindow.setContent(html);
+    infowindow.open(map3, marker3);
+    }); 
+  var marker4 = new google.maps.Marker({position: latlng, map: map4, title: label});
+    google.maps.event.addListener(marker4, "mouseover", function() {
+    infowindow.setContent(html);
+    infowindow.open(map4, marker4);
+    }); 
+  var marker5 = new google.maps.Marker({position: latlng, map: map5, title: label});
+    google.maps.event.addListener(marker5, "mouseover", function() {
+    infowindow.setContent(html);
+    infowindow.open(map5, marker5);
+    }); 
+  var marker6 = new google.maps.Marker({position: latlng, map: map6, title: label});
+    google.maps.event.addListener(marker6, "mouseover", function() {
+    infowindow.setContent(html);
+    infowindow.open(map6, marker6);
+    }); 
+}
+
+google.maps.event.addDomListener(window, "load", initialize);
+
+
+
+$('#setfile').on('change', function(){ //ファイルが選択されるたびに動作するイベントハンドラ
+    var strFileInfo = $("#setfile")[0].files[0]; //jQueryでファイルオブジェクトを変数にセット
+    if(strFileInfo && strFileInfo.type.match('image.*')){ //選択されたファイルが画像であれば、処理を継続
+
+      $('#preview').remove();  //表示中のプレビュー画像があれば、削除しておく
+      $('#preview_area').append('<img id="preview" width="260" />'); //横幅300pxの空の画像をプレビューエリアにセット
+
+      fileReader = new FileReader(); //HTML5 のAPI である FileReader() メソッドを初期化
+      fileReader.onload = function(event){
+        $('#preview').attr('src', event.target.result);
+      }
+
+      fileReader.readAsDataURL(strFileInfo); //ローカルフォルダから画像ファイルが読み込まれる
+    }
+});
+
+
+
+
+
+// AIzaSyB3kx-qpNmBNAgwpNDWE8YwiUJXfhcUZ7Y
+</script>
+
+</body>
+</html>

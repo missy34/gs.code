@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mishiMap</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/gmaps_main.css">
+
+    
+    <style>
+    </style>
+  </head>
+
+<body>
+    <div id="map"></div>
+
+
+
+    <script>
+
+    var map;
+    var marker = [];
+    var data = [];
+    
+
+    function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 35.667263, lng: 139.713760} ,
+            zoom: 15
+        });
+            $.getJSON("maps.json", function(json){
+                for (var i = 0; i < json.length; i++) {
+                data.push(
+        {
+            'name': json[i].name,
+            'lat': json[i].lat,
+            'lng': json[i].lng
+        }
+        );
+        };
+            for (var i = 0; i < data.length; i++) {
+            markerLatLng = {lat: data[i]['lat'], lng: data[i]['lng']};
+            marker[i] = new google.maps.Marker({
+            position: markerLatLng,
+            map: map
+        });
+        }
+        });
+    }
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3kx-qpNmBNAgwpNDWE8YwiUJXfhcUZ7Y&callback=initMap"
+    async defer></script>
+
+</body>
+</html>
+
